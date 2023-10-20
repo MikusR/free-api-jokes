@@ -13,6 +13,7 @@
     }
   ],
   "require": {
-    "php-school/cli-menu": "^4.3"
+    "php-school/cli-menu": "^4.3",
+    "ext-json": "*"
   }
 }
