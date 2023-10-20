@@ -15,21 +15,19 @@ class Application
         };
 
         $menu = (new CliMenuBuilder)
-            ->setTitle('Basic CLI Menu Disabled Items')
+            ->setTitle('CLI Menu')
             ->addItem('First Item', $itemCallable)
-            ->addItem('Second Item', $itemCallable, false, true)
-            ->addItem('Third Item', $itemCallable, false, true)
-            ->addSubMenu('Submenu', function (CliMenuBuilder $b) use ($itemCallable) {
-                $b->setTitle('Basic CLI Menu Disabled Items > Submenu')
-                    ->addItem('You can go in here!', $itemCallable);
-            })
-            ->
-            addSubMenu('Disabled Submenu', function (CliMenuBuilder $b) use ($itemCallable) {
-                $b->setTitle('Basic CLI Menu Disabled Items > Disabled Submenu')
-                    ->addItem('Nope can\'t see this!', $itemCallable)
-                    ->disableMenu();
-            })
+            ->addItem('Second Item', $itemCallable)
             ->addLineBreak('-')
+            ->addSubMenu('Options', function (CliMenuBuilder $b) {
+                $b->setTitle('CLI Menu > Options')
+                    ->addItem('First option', function (CliMenu $menu) {
+                        echo sprintf('Executing option: %s', $menu->getSelectedItem()->getText());
+                    })
+                    ->addLineBreak('-');
+            })
+            ->setWidth(70)
+            ->setBackgroundColour('yellow')
             ->build();
 
         $menu->open();

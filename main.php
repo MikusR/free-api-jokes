@@ -3,3 +3,8 @@
 declare(strict_types=1);
 
 require_once 'vendor/autoload.php';
+
+use app\Application;
+
+$app = new Application;
+$app->run();
